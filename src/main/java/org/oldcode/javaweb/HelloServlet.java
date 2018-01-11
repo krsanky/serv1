@@ -14,8 +14,6 @@ public class HelloServlet extends HttpServlet {
         response.getWriter().print("Hello, World!");  
     }
 
-    /*
-    @override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         String name = request.getParameter("name");
@@ -23,6 +21,6 @@ public class HelloServlet extends HttpServlet {
         request.setAttribute("user", name);
         request.getRequestDispatcher("response.jsp").forward(request, response); 
     }
-    */
+
 }
 
