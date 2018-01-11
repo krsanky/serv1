@@ -1,0 +1,22 @@
+body {
+  background: #aaa;
+  color: #333;
+/*  font-size: 11px; */
+  height: auto;
+/*  padding-bottom: 20px; */
+}
+/*
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+*/
+
+#mybanner {
+/*    border: 1px solid green; */
+    background-color: #093;
+    min-height: 80px;
+}
