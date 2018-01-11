@@ -13,3 +13,4 @@ On *nix:
 http://127.0.0.1:8080/manager/html
 
 
+https://tomcat.apache.org/tomcat-8.0-doc/logging.html
