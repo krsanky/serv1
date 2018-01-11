@@ -1,12 +1,13 @@
 package org.oldcode.javaweb;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class MainServlet extends HttpServlet {
 
@@ -14,7 +15,12 @@ public class MainServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.error("GET ...");
+        log.error("GET error ...");
+        log.info("GET info ...");
+        log.debug("GET debug ...");
+        log.warn("GET warn ...");
+        /*
+        */
         response.getWriter().print("main servlet GET");
     }
 

@@ -5,11 +5,14 @@ gradlew*
 
 tmp/
 
-.idea/
 
 *.war
 
 build/
 
-*.iml
+// idea stuff:
+.idea/
+serv1.ipr
+serv1.iws
 
+src/main/webapp/960gs/
