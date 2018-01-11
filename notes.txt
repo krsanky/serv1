@@ -1,1 +1,15 @@
 gradle tasks
+
+https://github.com/google/google-java-format
+
+https://guides.gradle.org/building-java-web-applications/
+
+tomcat:
+On *nix:
+      $CATALINA_HOME/bin/startup.sh
+    or
+      $CATALINA_HOME/bin/catalina.sh startOA
+
+http://127.0.0.1:8080/manager/html
+
+
