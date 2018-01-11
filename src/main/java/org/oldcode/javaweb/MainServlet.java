@@ -6,19 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class HelloServlet extends HttpServlet {
+public class MainServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        response.getWriter().print("Hello, World!");
+        response.getWriter().print("main servlet GET");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        String name = request.getParameter("name");
-        if (name == null) name = "World";
-        request.setAttribute("user", name);
-        request.getRequestDispatcher("response.jsp").forward(request, response); 
+        response.getWriter().print("main servlet POST");
     }
 
 }

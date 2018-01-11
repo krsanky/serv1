@@ -17,7 +17,11 @@
     <servlet>
         <servlet-name>serv1</servlet-name>
         <servlet-class>org.oldcode.javaweb.HelloServlet</servlet-class>
+    </servlet>
 
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <servlet-class>org.oldcode.javaweb.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -25,5 +29,9 @@
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
 
 </web-app>
