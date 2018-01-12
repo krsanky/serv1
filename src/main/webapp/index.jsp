@@ -24,10 +24,10 @@
 <section class="section">
     <div class="container">
       <h1 class="title">
-        Hello World
+        Javaweb
       </h1>
       <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
+        A website with <strong>Java</strong>!
       </p>
     <form method="post" action="hello">
         <h2>Name:</h2>
