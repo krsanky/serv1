@@ -18,3 +18,7 @@ serv1.iws
 src/main/webapp/960gs/
 settings.properties
 out/
+
+*.log
+*.core
+

@@ -14,3 +14,14 @@ http://127.0.0.1:8080/manager/html
 
 
 https://tomcat.apache.org/tomcat-8.0-doc/logging.html
+
+JSP:
+Instead of using static include, you can use dynamic include, then you can do something like this:-
+
+<jsp:include page="<%= myVariable %>" flush="true" />
+
+or
+
+<jsp:include page="${myVariable}" flush="true" />
+
+

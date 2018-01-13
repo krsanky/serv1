@@ -4,41 +4,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>javaweb</title>
-
-    <!--
-    <link rel="stylesheet" href="static/normalize.css"/>
-    <link rel="stylesheet" href="static/960gs/css/960.css" />
-    -->
-
     <link rel="stylesheet" href="static/bulma/css/bulma.css" />
-
     <link rel="stylesheet" href="static/style.css" />
     <link rel="icon" href="static/favicon.ico">
 </head>
 
-
 <body>
 
-<section class="section">
-    <div class="container">
-      <h1 class="title">
-        Javaweb
-      </h1>
-      <p class="subtitle">
-        A website with <strong>Java</strong>!
-      </p>
-    <form method="post" action="hello">
-        <h2>Name:</h2>
-        <input type="text" id="say-hello-text-input" name="name" />
-        <input type="submit" id="say-hello-button" value="Say Hello" />
-    </form>
-    </div>
-</section>
-
-
-
+<!-- content -->
+<%
+//String include = (String)request.getAttribute("content_include");
+//if (include == null) include = "_default.jsp";
+//String include = "_default.jsp";
+%>
+<%--
+<jsp:include page="${_include}" flush="true" />
+--%>
+<jsp:include page="_default.jsp" flush="true" />
+<!-- content -->
 
 <script src="static/zepto.min.js"></script>
 <script src="static/page.js"></script>
