@@ -25,15 +25,7 @@ public class Settings {
     		if (in == null)  {
     	        System.out.println("Sorry, unable to find " + filename);
     		}
-
     		props.load(in);
-
-            //get the property value and print it out
-            /*
-    	    System.out.println(props.getProperty("db_user"));
-    	    System.out.println(props.getProperty("db_password"));
-    	    */
-
     	} catch (IOException ex) {
     		ex.printStackTrace();
         } finally {
@@ -46,7 +38,5 @@ public class Settings {
         	}
         }
     }
-
-
 }
 
