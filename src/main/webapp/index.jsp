@@ -14,14 +14,11 @@
 
 <!-- content -->
 <%
-//String include = (String)request.getAttribute("content_include");
-//if (include == null) include = "_default.jsp";
-//String include = "_default.jsp";
+if (request.getAttribute("content_include") == null) {
+    request.setAttribute("content_include", "_default.jsp");
+}
 %>
-<%--
-<jsp:include page="${_include}" flush="true" />
---%>
-<jsp:include page="_default.jsp" flush="true" />
+<jsp:include page="${content_include}" flush="true" />
 <!-- content -->
 
 <script src="static/zepto.min.js"></script>
