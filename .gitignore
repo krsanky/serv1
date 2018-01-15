@@ -12,8 +12,8 @@ build/
 
 // idea stuff:
 .idea/
-serv1.ipr
-serv1.iws
+*.ipr
+*.iws
 
 src/main/webapp/960gs/
 settings.properties
@@ -27,3 +27,4 @@ out/
 # sensitive data:
 src/main/webapp/META-INF/context.xml
 
+src/main/resources/log4j2.properties-notes

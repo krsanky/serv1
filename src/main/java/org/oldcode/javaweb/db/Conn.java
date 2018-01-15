@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
@@ -14,6 +15,23 @@ public class Conn {
 
     public void getAccounts() {
         log.debug("Conn.getAccounts()...");
+    }
+
+    public DataSource getDataSource() throws NamingException {
+
+        InitialContext cxt = new InitialContext();
+        if (cxt == null) {
+            //throw new Exception("Uh oh -- no context!");
+            log.error("InitalContext is null ... bad");
+        }
+
+        DataSource ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
+
+        if (ds == null) {
+            //throw new Exception("Data source not found!");
+            log.error("DataSource is null ... bad");
+        }
+        return null;
     }
 
     public void testConn() {
