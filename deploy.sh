@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DIR1="$HOME/JAVA/serv1"
-WAR="build/libs/serv1.war"
+WAR="build/libs/serv1*.war"
 URL="http://tomcat:tomcat@localhost:8080/manager/text/deploy?path=/serv1&update=true"
 
 cd $DIR1

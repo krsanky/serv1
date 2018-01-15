@@ -5,7 +5,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'idea'
 
-group = 'org.sample'
+group = 'org.oldcode.javaweb'
 version = '0.1.0-SNAPSHOT'
 description = 'FIXME: write description'
 

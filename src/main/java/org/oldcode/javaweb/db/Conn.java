@@ -17,21 +17,21 @@ public class Conn {
         log.debug("Conn.getAccounts()...");
     }
 
-    public DataSource getDataSource() throws NamingException {
+    public DataSource getDataSource() throws Exception {
 
         InitialContext cxt = new InitialContext();
         if (cxt == null) {
-            //throw new Exception("Uh oh -- no context!");
             log.error("InitalContext is null ... bad");
+            throw new Exception("Uh oh -- no context!");
         }
 
         DataSource ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
 
         if (ds == null) {
-            //throw new Exception("Data source not found!");
             log.error("DataSource is null ... bad");
+            throw new Exception("Data source not found!");
         }
-        return null;
+        return ds;
     }
 
     public void testConn() {

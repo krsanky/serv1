@@ -4,16 +4,30 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.oldcode.javaweb.db.Conn;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MainServlet extends HttpServlet {
 
+    /*
+    more then 2 levels is silly
+    log.error("GET error ...");
+    log.warn("GET warn ...");
+    log.info("GET info ...");
+    log.debug("GET debug ...");
+    */
     private static final Logger log = LogManager.getLogger(MainServlet.class);
+
     private static Settings settings = null;
 
     @Override
@@ -26,12 +40,6 @@ public class MainServlet extends HttpServlet {
             log.debug("init() settings read()");
         }
 
-        /*
-        log.error("GET error ...");
-        log.info("GET info ...");
-        log.debug("GET debug ...");
-        log.warn("GET warn ...");
-        */
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,9 +48,44 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("content_include", "_accounts.jsp");
         log.debug("doGet() plz dont crash");
 
-        Conn c = new Conn();
-        c.testConn();
+        PreparedStatement ps = null;
+        String sql = "SELECT id, password, username, email, is_active "+
+            "FROM account";
+        // "FROM account WHERE id= ?";
+
+        Conn conn = new Conn();
+        conn.testConn();
         log.debug("doGet() .testConn() worked :)");
+        log.error("GET error ...");
+        log.debug("GET debug ...");
+
+        DataSource ds;
+        Connection c;
+        try {
+            ds = conn.getDataSource();
+            if (ds == null)
+                log.debug("ds == null");
+            c = ds.getConnection();
+
+            ps = c.prepareStatement(sql);
+            //ps.setInt(1, 1001);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                log.debug("id : " + id);
+                log.debug("username : " + username);
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
