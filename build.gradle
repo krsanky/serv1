@@ -26,6 +26,8 @@ dependencies {
     // this is manually put into tomcat's lib/
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 
+    compile group: 'commons-dbutils', name: 'commons-dbutils', version: '1.7'
+
     compile 'org.clojure:clojure:1.8.0'
 
     // providedCompile comes from war plugin:
