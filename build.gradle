@@ -1,9 +1,20 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
+    }
+}
 plugins {
     id 'gradle-clojure.clojure' version '0.3.1'
 }
 apply plugin: 'java'
+apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'war'
 apply plugin: 'idea'
+
+
 
 group = 'org.oldcode.javaweb'
 version = '0.1.0-SNAPSHOT'
@@ -23,7 +34,7 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
 
-    // this is manually put into tomcat's lib/
+    // put this is manually into tomcat's lib/
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 
     compile group: 'commons-dbutils', name: 'commons-dbutils', version: '1.7'
@@ -33,8 +44,13 @@ dependencies {
     // providedCompile comes from war plugin:
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0' 
 
-    testCompile 'junit:junit:4.12'
-    devCompile 'org.clojure:tools.namespace:0.3.0-alpha4'
+    //devCompile 'org.clojure:tools.namespace:0.3.0-alpha4'
+
+    testCompile 'junit:junit:4.12' //clojure uses junit4
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.3'
+	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
+	// To avoid compiler warnings about @API annotations in JUnit code
+    testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
 }
 
 
