@@ -13,6 +13,6 @@
 include 'shared'
 include 'api'
 include 'services:webservice'
-*/
 
-rootProject.name = 'serv1'
+rootProject.name = 'xyz'
+*/

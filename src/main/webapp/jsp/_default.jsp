@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta http-equiv="refresh" content="2;url=/serv1/main" />
+<%--        <meta http-equiv="refresh" content="2;url=/serv1/main" /> --%>
     </head>
     <body>
         <h1>_default.jsp</h1>

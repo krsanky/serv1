@@ -2,9 +2,10 @@ package org.oldcode.javaweb;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.oldcode.javaweb.controller.Controller;
+import org.oldcode.javaweb.controller.Test1;
 import org.oldcode.javaweb.db.Conn;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainServlet extends HttpServlet {
 
@@ -30,6 +35,8 @@ public class MainServlet extends HttpServlet {
 
     private static Settings settings = null;
 
+    private Map<String, Controller> controllers = null;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -40,58 +47,25 @@ public class MainServlet extends HttpServlet {
             log.debug("init() settings read()");
         }
 
+        controllers = new HashMap<>();
+        controllers.put("test1", new Test1());
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("user", "name...");
-        request.setAttribute("content_include", "_accounts.jsp");
+
         log.debug("doGet() plz dont crash");
 
-        PreparedStatement ps = null;
-        String sql = "SELECT id, password, username, email, is_active "+
-            "FROM account";
-        // "FROM account WHERE id= ?";
+        //response.getWriter().print("main servlet POST");
 
-        Conn conn = new Conn();
-        conn.testConn();
-        log.debug("doGet() .testConn() worked :)");
-        log.error("GET error ...");
-        log.debug("GET debug ...");
-
-        DataSource ds;
-        Connection c;
-        try {
-            ds = conn.getDataSource();
-            if (ds == null)
-                log.debug("ds == null");
-            c = ds.getConnection();
-
-            ps = c.prepareStatement(sql);
-            //ps.setInt(1, 1001);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String username = rs.getString("username");
-                log.debug("id : " + id);
-                log.debug("username : " + username);
-            }
-        } catch (SQLException e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
-        }
-
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        controllers.get("test1").Do(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getWriter().print("main servlet POST");
+        doGet(request, response);
     }
 
     public static Settings getSettings() {
