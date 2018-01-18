@@ -4,22 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.oldcode.javaweb.controller.Controller;
 import org.oldcode.javaweb.controller.Test1;
-import org.oldcode.javaweb.db.Conn;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainServlet extends HttpServlet {
@@ -59,6 +51,9 @@ public class MainServlet extends HttpServlet {
         log.debug("doGet() plz dont crash");
 
         //response.getWriter().print("main servlet POST");
+
+        RouteParts parts = Route.parseParts(request);
+        log.debug("RouterParts: "+parts);
 
         controllers.get("test1").Do(request, response);
     }
