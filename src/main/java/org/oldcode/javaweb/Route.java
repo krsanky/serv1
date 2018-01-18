@@ -9,7 +9,7 @@ public class Route {
 
     private static final Logger log = LogManager.getLogger(Route.class);
 
-    public static RouteParts parseParts(HttpServletRequest r) {
+    public static void debugMethodPathEtc(HttpServletRequest r) {
         log.debug("context path: "+r.getContextPath());
         log.debug("method: "+r.getMethod());
         log.debug("path info: "+r.getPathInfo());
@@ -17,27 +17,39 @@ public class Route {
         log.debug("request URI: "+r.getRequestURI());
         log.debug("request URL: "+r.getRequestURL());
         log.debug("servlet path: "+r.getServletPath());
-/*
-context path: /xyz
-method: GET
-path info: null
-path translated: null
-request URI: /xyz/controller-method.1
-request URL: http://127.0.0.1:8080/xyz/controller-method.1
-servlet path: /controller-method.1
+    }
 
-the paths are blank if they came in on the blank match.
-*/
+    public static RouteParts parseParts(HttpServletRequest r) {
+        debugMethodPathEtc(r);
 
         String servletPath = r.getServletPath();
         if (servletPath.startsWith("/")) servletPath = servletPath.substring(1);
         log.debug("servlet path: "+servletPath);
-        String[] pparts = servletPath.split("\\.");
-        for (String s: pparts) {
+        String[] parts = servletPath.split("\\.");
+        for (String s: parts) {
             log.debug("ppart:"+s);
         }
 
-        return new RouteParts("contrl1", "method4");
+        RouteParts rps = new RouteParts();
+        if (parts != null && parts.length != 2) {
+            rps.valid = false;
+            return rps;
+        }
+        rps.version = parts[1];
+        parts = (parts[0]).split("-+");
+        for (String p: parts) {
+           log.debug("p:"+p);
+        }
+        if (parts != null && parts.length < 2) {
+            rps.valid = false;
+            return rps;
+        }
+        rps.controller = parts[0];
+        rps.method = parts[1];
+
+        log.debug(rps);
+
+        return rps;
     }
 
 }
