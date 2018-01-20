@@ -2,6 +2,7 @@ package org.oldcode.javaweb.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.oldcode.javaweb.Route;
 import org.oldcode.javaweb.db.Conn;
 
 import javax.servlet.ServletException;
@@ -14,11 +15,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Test1 implements Controller {
+public class Test1 extends ControllerBase {
 
     private static final Logger log = LogManager.getLogger(Test1.class);
+    //private Map<String, >
 
-    public void Do(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    public void handleRequest(Route route, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PreparedStatement ps = null;
         String sql = "SELECT id, password, username, email, is_active "+
@@ -59,9 +62,9 @@ public class Test1 implements Controller {
         }
 
         request.setAttribute("content_include", "_accounts.jsp");
-        //request.setAttribute("log", log);
         request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
     }
+
 }
 
 

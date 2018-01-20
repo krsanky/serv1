@@ -4,10 +4,42 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public class Route {
 
     private static final Logger log = LogManager.getLogger(Route.class);
+
+    public String controller;
+    public String method;
+    public String version;
+    public boolean valid;
+    public Map<String, String> params; // these are specific to our naming scheme, not Servlet Request params
+
+    public Route(String c, String m, String v) {
+        controller = c;
+        method = m;
+        version = v;
+        params = null;
+        valid = false;
+    }
+    public Route(String c, String m) {
+        this(c, m, null);
+    }
+    public Route() {
+        this(null, null, null);
+    }
+    public Route(boolean valid) {
+        controller = null;
+        method = null;
+        version = null;
+        params = null;
+        this.valid = valid;
+    }
+
+    public String toString() {
+        return String.format("<Route controller:%s method:%s version:%s params:null>", controller, method, version);
+    }
 
     public static void debugMethodPathEtc(HttpServletRequest r) {
         log.debug("context path: "+r.getContextPath());
@@ -19,7 +51,7 @@ public class Route {
         log.debug("servlet path: "+r.getServletPath());
     }
 
-    public static RouteParts parseParts(HttpServletRequest r) {
+    public static Route parse(HttpServletRequest r) {
         debugMethodPathEtc(r);
 
         String servletPath = r.getServletPath();
@@ -30,26 +62,28 @@ public class Route {
             log.debug("ppart:"+s);
         }
 
-        RouteParts rps = new RouteParts();
+        Route route = new Route();
         if (parts != null && parts.length != 2) {
-            rps.valid = false;
-            return rps;
+            route.valid = false;
+            return route;
         }
-        rps.version = parts[1];
+        route.version = parts[1];
         parts = (parts[0]).split("-+");
         for (String p: parts) {
            log.debug("p:"+p);
         }
         if (parts != null && parts.length < 2) {
-            rps.valid = false;
-            return rps;
+            route.valid = false;
+            return route;
         }
-        rps.controller = parts[0];
-        rps.method = parts[1];
+        route.controller = parts[0];
+        route.method = parts[1];
+        // declare valid!
+        route.valid = true;
 
-        log.debug(rps);
+        log.debug(route);
 
-        return rps;
+        return route;
     }
 
 }
