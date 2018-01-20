@@ -21,25 +21,27 @@ public class MainServlet extends HttpServlet {
 
     private static final Logger log = LogManager.getLogger(MainServlet.class);
 
-    private static Settings settings = null;
-
+    private Settings settings = null;
     private Map<String, Controller> controllers = null;
+
+    private void addControllers() {
+        controllers.put("test1", new Test1());
+        controllers.put("account", new Account());
+        controllers.put("default", new Main());
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         log.debug("init() debug ...");
+
         if (settings == null) {
             settings = new Settings();
             settings.read();
             log.debug("init() settings read()");
         }
-
         controllers = new HashMap<>();
-        controllers.put("test1", new Test1());
-        controllers.put("account", new Account());
-        controllers.put("default", new Main());
-
+        addControllers();
         ServletContext ctx = config.getServletContext();
         ctx.setAttribute("org.oldcode.javaweb.controllers", controllers);
         ctx.setAttribute("org.oldcode.javaweb.settings", settings);
@@ -68,15 +70,6 @@ public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
-    }
-
-    public static Settings getSettings() {
-        if (settings == null) {
-            settings = new Settings();
-            settings.read();
-            log.debug("getSettings() settings read()");
-        }
-        return settings;
     }
 }
 

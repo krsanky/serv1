@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Controller {
-    // the base case implements this, so it's redundant here
-    // but it shows it's necesary
     void handleRequest(
             Route route,
             HttpServletRequest request,
