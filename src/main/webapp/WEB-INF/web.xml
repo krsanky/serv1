@@ -30,6 +30,18 @@
         <servlet-class>org.oldcode.javaweb.MainServlet</servlet-class>
     </servlet>
 
+    <!-- mapping -->
+	<!-- Define error page to react on Java exception -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error.jsp</location>
+	</error-page>
+	<!-- Define error page to react on HTTP response code -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+	
     <servlet-mapping>
         <servlet-name>serv1</servlet-name>
         <url-pattern>/hello</url-pattern>

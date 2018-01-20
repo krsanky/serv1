@@ -12,7 +12,8 @@
 
 <body>
 
-<!-- content -->
+<%@ include file="_header.jsp" %>
+
 <%
 if (request.getAttribute("content_include") == null) {
     request.setAttribute("content_include", "_default.jsp");
@@ -23,7 +24,7 @@ Apparently jsp:include is relative to the page called from.
 (no need to prepend jsp/ if it is a peer)
 --%>
 <jsp:include page="${content_include}" flush="true" />
-<!-- content -->
+
 
 <script src="static/zepto.min.js"></script>
 <script src="static/page.js"></script>
