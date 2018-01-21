@@ -11,8 +11,9 @@
 </head>
 
 <body>
-
+<%--
 <%@ include file="_header.jsp" %>
+--%>
 
 <%
 if (request.getAttribute("content_include") == null) {

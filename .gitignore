@@ -15,14 +15,11 @@ build/
 *.ipr
 *.iws
 
-src/main/webapp/960gs/
 settings.properties
 out/
 
 *.log
 *.core
-*.go
-*.sql
 
 # sensitive data:
 src/main/webapp/META-INF/context.xml

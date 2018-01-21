@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public interface Controller {
     void handleRequest(
-            Route route,
             HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException;
+            HttpServletResponse response,
+            Route route) throws ServletException, IOException;
 
     void defaultMethod(
             HttpServletRequest request,

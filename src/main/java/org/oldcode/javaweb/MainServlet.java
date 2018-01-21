@@ -60,9 +60,9 @@ public class MainServlet extends HttpServlet {
         log.debug("Route: "+route);
 
         if (controllers.containsKey(route.controller)) {
-            controllers.get(route.controller).handleRequest(route, request, response);
+            controllers.get(route.controller).handleRequest(request, response, route);
         } else {
-            controllers.get("test1").handleRequest(route, request, response);
+            controllers.get("test1").handleRequest(request, response, route);
         }
     }
 

@@ -10,24 +10,24 @@ import java.util.Map;
 
 abstract public class ControllerBase implements Controller {
     public void render(
-            String template,
             HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response,
+            String template) throws ServletException, IOException {
         request.setAttribute("content_include", template);
         request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
     }
 
     public void handleRequest(
-            Route route,
             HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response,
+            Route route) throws ServletException, IOException {
         defaultMethod(request, response);
     }
 
     public void defaultMethod(
             HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        render("_default.jsp", request, response);
+        render(request, response, "_default.jsp");
     }
 
     public void doDefaultMethod(

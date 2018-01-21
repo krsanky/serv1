@@ -21,7 +21,10 @@ public class Test1 extends ControllerBase {
     //private Map<String, >
 
     @Override
-    public void handleRequest(Route route, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void handleRequest(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Route route) throws ServletException, IOException {
 
         PreparedStatement ps = null;
         String sql = "SELECT id, password, username, email, is_active "+

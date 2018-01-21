@@ -15,6 +15,10 @@ public class User {
     public static User byName(String name) {
         return null;
     }
+
+    public static User[] all() {
+        return null;
+    }
 }
 
 /*

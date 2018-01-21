@@ -17,8 +17,6 @@ public class Password {
 
     private static final DigestRandomGenerator generator = new DigestRandomGenerator(new SHA3Digest(512));
 
-    private Password() {}
-
     public static String hash(String plainPassword) {
         return hash(plainPassword, salt(128), 512, 101501);
     }
