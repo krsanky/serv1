@@ -23,5 +23,7 @@ out/
 
 # sensitive data:
 src/main/webapp/META-INF/context.xml
+src/main/resources/jooq-webserver.xml
 
 src/main/resources/log4j2.properties-notes
+jooq-libs/
