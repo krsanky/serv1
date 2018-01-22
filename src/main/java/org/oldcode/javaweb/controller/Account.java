@@ -72,13 +72,6 @@ public class Account extends ControllerBase { //} implements Controller {
                     AccountRecord acct = create.newRecord(ACCOUNT);
                     acct.setUsername(username);
                     acct.setPassword(password);
-                    // set blanks
-                    acct.setEmail("");
-                    acct.setFirstName("");
-                    acct.setLastName("");
-                    acct.setIsActive(true);
-                    acct.setIsStaff(true);
-                    acct.setIsSuperuser(true);
                     acct.store();
                 }
             }
