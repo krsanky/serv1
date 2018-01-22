@@ -2,13 +2,23 @@ package org.oldcode.javaweb.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 import org.oldcode.javaweb.Password;
 import org.oldcode.javaweb.Route;
+import org.oldcode.javaweb.db.Conn;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+
+import static org.oldcode.javaweb.generated.jooq.public_.tables.Account.ACCOUNT;
+//import static test.generated.Tables.*;
 
 public class Account extends ControllerBase { //} implements Controller {
     private static final Logger log = LogManager.getLogger(Account.class);
@@ -51,6 +61,25 @@ public class Account extends ControllerBase { //} implements Controller {
             String hpass = Password.hash(password);
             log.debug("username:"+username+" password:"+password+" HASH:"+hpass);
         }
+
+        Conn conn = new Conn();
+        try {
+            Connection c = conn.getConnection();
+            DSLContext create = DSL.using(c, SQLDialect.POSTGRES);
+            Result<Record> result = create.select().from(ACCOUNT).fetch();
+            for (Record r : result) {
+                Integer id = r.getValue(ACCOUNT.ID);
+                String firstName = r.getValue(ACCOUNT.USERNAME);
+                String lastName = r.getValue(ACCOUNT.EMAIL);
+
+                log.debug("ID: " + id + " first name: " + firstName + " last name: " + lastName);
+            }
+        } catch (Exception e) {
+            log.debug("EXC: "+e.getMessage());
+            e.printStackTrace();
+
+        }
+        log.debug("last in admin");
 
         render(request, response, "account/admin.jsp");
     }

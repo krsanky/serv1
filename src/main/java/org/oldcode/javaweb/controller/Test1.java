@@ -32,7 +32,6 @@ public class Test1 extends ControllerBase {
         // "FROM account WHERE id= ?";
 
         Conn conn = new Conn();
-        conn.testConn();
         log.debug("doGet() .testConn() worked :)");
         log.error("GET error ...");
         log.debug("GET debug ...");
@@ -57,10 +56,10 @@ public class Test1 extends ControllerBase {
                 log.debug("username : " + username);
             }
         } catch (SQLException e) {
-            log.error(e.getMessage());
+            log.debug(e.getMessage());
             e.printStackTrace();
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.debug(e.getMessage());
             e.printStackTrace();
         }
 

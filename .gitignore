@@ -27,3 +27,4 @@ src/main/resources/jooq-webserver.xml
 
 src/main/resources/log4j2.properties-notes
 jooq-libs/
+src/main/java/org/oldcode/javaweb/generated/
