@@ -19,5 +19,8 @@
 
 	<%-- Display generic error to client --%>
 	<b>An error occur !</b>
+<pre>
+<%= exception.getMessage() %>
+</pre>
 </body>
 </html>

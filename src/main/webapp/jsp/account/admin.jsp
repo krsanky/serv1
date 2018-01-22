@@ -1,3 +1,8 @@
+<%@ page import="java.util.*" %>
+<%@ page import="static org.oldcode.javaweb.generated.jooq.public_.tables.Account.ACCOUNT" %>
+<%@ page import="org.jooq.Record" %>
+<%@ page import="org.jooq.Result" %>
+
 <%
 String password = request.getParameter("password");
 if (password == null) {
@@ -42,21 +47,29 @@ if (username == null) {
   </section>
 </form>
 
+
 <!-- all users -->
 <div class="container">
   <table class="table">
     <tbody>
       <tr>
-        <th>asd</th>
-        <th>123</th>
-        <th>asdasd</th>
+        <th>id</th>
+        <th>username</th>
+        <th>email</th>
+        <th>password</th>
       </tr>
-
+      <%
+      for (Record r: (Result<Record>)request.getAttribute("users")) {
+      %>
       <tr>
-        <td>asd</td>
-        <td>123</td>
-        <td>asdasd</td>
+        <td><%= r.getValue(ACCOUNT.ID) %></td>
+        <td><%= r.getValue(ACCOUNT.USERNAME) %></td>
+        <td><%= r.getValue(ACCOUNT.EMAIL) %></td>
+        <td><%= r.getValue(ACCOUNT.PASSWORD) %></td>
       </tr>
+      <%
+      }
+      %>
     </tbody>
   </table>
 </div>

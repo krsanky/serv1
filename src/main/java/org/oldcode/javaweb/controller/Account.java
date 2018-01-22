@@ -10,6 +10,7 @@ import org.jooq.impl.DSL;
 import org.oldcode.javaweb.Password;
 import org.oldcode.javaweb.Route;
 import org.oldcode.javaweb.db.Conn;
+import org.oldcode.javaweb.generated.jooq.public_.tables.records.AccountRecord;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,33 +55,51 @@ public class Account extends ControllerBase { //} implements Controller {
             HttpServletResponse response) throws ServletException, IOException {
         log.debug("Here in admin, method: "+ request.getMethod());
 
-        if ("POST".equals(request.getMethod())) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            String hpass = Password.hash(password);
-            log.debug("username:"+username+" password:"+password+" HASH:"+hpass);
-        }
-
         Conn conn = new Conn();
+        Result<Record> accounts = null;
+        Connection c = null;
         try {
-            Connection c = conn.getConnection();
+            c = conn.getConnection();
             DSLContext create = DSL.using(c, SQLDialect.POSTGRES);
-            Result<Record> result = create.select().from(ACCOUNT).fetch();
-            for (Record r : result) {
+
+            if ("POST".equals(request.getMethod())) {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+
+                if (username != null && password != null && password.length() > 0) {
+                    String hpass = Password.hash(password);
+                    log.debug("username:" + username + " password:" + password + " HASH:" + hpass);
+                    AccountRecord acct = create.newRecord(ACCOUNT);
+                    acct.setUsername(username);
+                    acct.setPassword(password);
+                    // set blanks
+                    acct.setEmail("");
+                    acct.setFirstName("");
+                    acct.setLastName("");
+                    acct.setIsActive(true);
+                    acct.setIsStaff(true);
+                    acct.setIsSuperuser(true);
+                    acct.store();
+                }
+            }
+
+            accounts = create.select().from(ACCOUNT).fetch();
+            log.debug("accounts: type: "+accounts.getClass());
+            for (Record r : accounts) {
                 Integer id = r.getValue(ACCOUNT.ID);
                 String firstName = r.getValue(ACCOUNT.USERNAME);
                 String lastName = r.getValue(ACCOUNT.EMAIL);
 
                 log.debug("ID: " + id + " first name: " + firstName + " last name: " + lastName);
             }
+            request.setAttribute("users", accounts);
+
         } catch (Exception e) {
-            log.debug("EXC: "+e.getMessage());
+            log.debug("EXC:"+e.getMessage());
             e.printStackTrace();
-
         }
-        log.debug("last in admin");
 
+        log.debug("last in admin");
         render(request, response, "account/admin.jsp");
     }
 }
