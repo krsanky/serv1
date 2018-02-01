@@ -1,0 +1,35 @@
+
+gradle clojureRepl ##displays port to use
+
+#####
+
+wise@mana:~/JAVA/xyz$ lein repl :connect 30672
+Connecting to nREPL at 127.0.0.1:30672
+REPL-y 0.3.7, nREPL 0.2.12
+Clojure 1.8.0
+OpenJDK 64-Bit Server VM 1.8.0_152-b16
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
+
+user=> (println "sd")
+sd
+nil
+user=> (require '[org.oDisplay all 743 possibilities? (y or n)
+user=> (require '[org.oldcode.xyz.core :as xxx])
+Warning: *pkg-global* not declared dynamic and thus is not dynamically rebindable, but its name suggests otherwise. Please either indicate ^:dynamic *pkg-global* or change the name. (org/oldcode/xyz/core.clj:3)
+nil
+user=> (xxx/xyz)
+"xyz..."
+user=> 
+
+
+
+
+
+
+
+
