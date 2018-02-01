@@ -57,15 +57,17 @@ if (username == null) {
         <th>username</th>
         <th>email</th>
         <th>password</th>
+        <th>del?</th>
       </tr>
       <%
       for (Record r: (Result<Record>)request.getAttribute("users")) {
       %>
       <tr>
-        <td><%= r.getValue(ACCOUNT.ID) %></td>
+        <td><%= r.getValue(ACCOUNT.ID) %><i class="ion-ionic ion-social-freebsd-devil has-text-danger"></i></td>
         <td><%= r.getValue(ACCOUNT.USERNAME) %></td>
         <td><%= r.getValue(ACCOUNT.EMAIL) %></td>
         <td><%= r.getValue(ACCOUNT.PASSWORD) %></td>
+        <td><span class="icon"><i class="ion-ionic ion-trash-a has-text-danger"></i></span></td>
       </tr>
       <%
       }

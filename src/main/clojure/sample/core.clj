@@ -1,10 +1,4 @@
-(ns sample.core
-  (:require [clojure.java.io :as io]))
+(ns sample.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn test123 [] "test123...")
 
-(defn bar []
-  (println (slurp (io/resource "sample.txt"))))

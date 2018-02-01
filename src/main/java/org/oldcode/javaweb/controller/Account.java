@@ -1,5 +1,7 @@
 package org.oldcode.javaweb.controller;
 
+import clojure.java.api.Clojure;
+import clojure.lang.IFn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jooq.DSLContext;
@@ -27,7 +29,8 @@ public class Account extends ControllerBase { //} implements Controller {
     @Override
     public void handleRequest(
             HttpServletRequest request,
-            HttpServletResponse response, Route route) throws ServletException, IOException {
+            HttpServletResponse response,
+            Route route) throws ServletException, IOException {
         log.debug("Here in Account controller");
         switch (route.method) {
             case "login": login(request, response); break;
@@ -54,6 +57,25 @@ public class Account extends ControllerBase { //} implements Controller {
             HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         log.debug("Here in admin, method: "+ request.getMethod());
+
+        IFn plus = Clojure.var("clojure.core", "+");
+
+        IFn require = Clojure.var("clojure.core","require");
+        require.invoke(Clojure.read("sample.core"));
+        require.invoke(Clojure.read("org.oldcode.xyz.core"));
+        IFn test123 = Clojure.var("sample.core", "test123");
+        IFn xyz = Clojure.var("org.oldcode.xyz.core", "xyz");
+        try {
+            log.debug("test123:::" + test123.invoke());
+            log.debug("PLUS + 1 2: "+plus.invoke(1, 2));
+            log.debug("INVOKE:::" + xyz.invoke());
+        } catch (IllegalStateException e) {
+            log.debug("EXC: "+e.getMessage());
+        }
+
+        IFn printLength = Clojure.var("org.oldcode.xyz.core", "*pkg-global*");
+        IFn deref = Clojure.var("clojure.core", "deref");
+        log.debug("deref::::"+deref.invoke(printLength));
 
         Conn conn = new Conn();
         Result<Record> accounts = null;
@@ -87,6 +109,7 @@ public class Account extends ControllerBase { //} implements Controller {
             }
             request.setAttribute("users", accounts);
 
+            c.close();
         } catch (Exception e) {
             log.debug("EXC:"+e.getMessage());
             e.printStackTrace();

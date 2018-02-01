@@ -2,10 +2,8 @@ package org.oldcode.javaweb;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.oldcode.javaweb.controller.Account;
-import org.oldcode.javaweb.controller.Controller;
+import org.oldcode.javaweb.controller.*;
 import org.oldcode.javaweb.controller.Main;
-import org.oldcode.javaweb.controller.Test1;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -28,6 +26,7 @@ public class MainServlet extends HttpServlet {
         controllers.put("test1", new Test1());
         controllers.put("account", new Account());
         controllers.put("default", new Main());
+        controllers.put("hello", new Hello());
     }
 
     @Override
@@ -51,11 +50,6 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("user", "name...");
-
-        log.debug("doGet() plz dont crash");
-
-        //response.getWriter().print("main servlet POST");
-
         Route route = Route.parse(request);
         log.debug("Route: "+route);
 

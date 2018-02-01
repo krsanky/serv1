@@ -14,7 +14,7 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'war'
 apply plugin: 'idea'
 
-
+//aotCompile = true // needed for gen-class in servlet.clj
 
 group = 'org.oldcode.javaweb'
 version = '0.1.0-SNAPSHOT'
@@ -26,6 +26,19 @@ repositories {
         name = 'clojars'
         url = 'https://clojars.org/repo/'
     }
+}
+
+// this doesnt work, at least not in wars where it does.
+// (calling clojure from java)
+// Maybe because the classnames of mine are not needed at compile time.
+// They are brought in at runtime.
+sourceSets {
+    pre
+    main.compileClasspath += pre.output
+}
+
+configurations {
+    preCompile.extendsFrom compile
 }
 
 dependencies {
