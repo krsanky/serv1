@@ -17,33 +17,3 @@ Mousetrap.bind('up up down down left right left right b a enter', function() {
     highlight([21, 22, 23]);
 });
 
-
-/* react test */
-var data = {
-  products: [
-    { id: 1, title: 'Consulting' },
-    { id: 2, title: 'TMFHR' },
-  ],
-};
-
-
-// then just use `data`
-const HomePage = () => (
-  <div>
-    {data.products.map(product => (
-      <p>{product.title}</p>
-    ))}
-  </div>
-);
-
-// simplest thing?
-class PageA extends Component {
-  render() {
-    return (
-      <div>Do things</div>
-    );
-  }
-}
-
-ReactDOM.render(<PageA />, document.body);
-

@@ -2,7 +2,6 @@ package org.oldcode.javaweb;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class Route {
     public String method;
     public String version;
     public boolean valid;
-    public Map<String, String> params; // these are specific to our naming scheme, not Servlet Request params
+    public Map<String, String> params; // these are specific to our url-|routing/naming scheme, not Servlet Request params
 
     public Route(String c, String m, String v) {
         controller = c;
@@ -38,7 +37,7 @@ public class Route {
     }
 
     public String toString() {
-        return String.format("<Route controller:%s method:%s version:%s params:null>", controller, method, version);
+        return String.format("<Route:%s method:%s version:%s params:null>", controller, method, version);
     }
 
     public static void debugMethodPathEtc(HttpServletRequest r) {

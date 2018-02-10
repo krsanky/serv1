@@ -33,6 +33,11 @@ Apparently jsp:include is relative to the page called from.
 <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 <script src="static/mousetrap.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
 <script src="static/page.js"></script>
 </body>
 </html>

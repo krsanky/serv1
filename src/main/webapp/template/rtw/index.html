@@ -1,0 +1,18 @@
+{% extends "template/base.html" %}
+
+{% block main %}
+<section class="section">
+	<div class="container">
+    <h1 class="title">Hello World {{name}}</h1>
+    <p class="subtitle">
+      My first website with <strong>Bulma</strong>!
+    </p>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_foot %}
+{{ parent() }}
+<script src="static/rtw.js"></script>
+{% endblock %}
+

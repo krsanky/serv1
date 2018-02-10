@@ -1,5 +1,6 @@
 package org.oldcode.javaweb;
 
+import com.mitchellbosecke.pebble.PebbleEngine;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.oldcode.javaweb.controller.*;
@@ -21,12 +22,14 @@ public class MainServlet extends HttpServlet {
 
     private Settings settings = null;
     private Map<String, Controller> controllers = null;
+    private PebbleEngine templateEngine;
 
     private void addControllers() {
         controllers.put("test1", new Test1());
         controllers.put("account", new Account());
         controllers.put("default", new Main());
         controllers.put("hello", new Hello());
+        controllers.put("rtw", new Rtw());
     }
 
     @Override
@@ -42,13 +45,14 @@ public class MainServlet extends HttpServlet {
         controllers = new HashMap<>();
         addControllers();
         ServletContext ctx = config.getServletContext();
+
         ctx.setAttribute("org.oldcode.javaweb.controllers", controllers);
         ctx.setAttribute("org.oldcode.javaweb.settings", settings);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         request.setAttribute("user", "name...");
         Route route = Route.parse(request);
         log.debug("Route: "+route);
@@ -62,7 +66,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         doGet(request, response);
     }
 }

@@ -76,4 +76,22 @@
         <url-pattern>*.z</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>funFilter1</filter-name>
+        <filter-class>org.oldcode.javaweb.filter.FunFilter1</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>funFilter1</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>funFilter2</filter-name>
+        <filter-class>org.oldcode.javaweb.filter.FunFilter2</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>funFilter2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
